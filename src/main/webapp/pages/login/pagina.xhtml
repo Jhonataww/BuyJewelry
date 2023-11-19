@@ -1,0 +1,110 @@
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGroup rendered="#{homeMB.home}">
+        <h:form>
+            <h:graphicImage library="images" name="home.png" height="700" width="1024"/>
+        </h:form>
+    </h:panelGroup>
+
+
+    <p:panel rendered="#{!loginMB.loginStatus}" id="toggleableLogin" header="Login" toggleable="true" closable="false" toggleSpeed="500">
+        <p:panelGrid>
+
+            <p:inputText placeholder="Nome " value="#{loginMB.email}" autocomplete="off" />
+            <p:password placeholder="Senha " value="#{loginMB.senha}" autocomplete="off" feedback="false"/>
+
+            <p:commandButton value="Entrar" update="pagina" icon="fa fa-check"
+                             id="btnEntrar" ajax="true"
+                             actionListener="#{loginMB.login()}">
+            </p:commandButton>
+
+        </p:panelGrid>
+
+        <br/>
+        <p:commandLink value="Cadastrar" update="pagina" ajax="true" actionListener="#{homeMB.isCadastro()}"/>
+    </p:panel>
+
+    <br/>
+    <p:panel rendered="#{homeMB.cadastro}" id="toggleableCadastro" header="Cadastrar" toggleable="true" closable="false" toggleSpeed="500">
+                <p:panelGrid columns="2">
+                    <h:outputText value="Nome " />
+                    <p:inputText  autocomplete="off" value="#{loginMB.usuario.nome}"/>
+
+                    <h:outputText value="Idade " />
+                    <p:inputText autocomplete="off" value="#{loginMB.usuario.idade}"/>
+
+                    <h:outputText value="CPF " />
+                    <p:inputText  autocomplete="off" value="#{loginMB.usuario.cpf}"/>
+
+                    <h:outputText value="CEP " />
+                    <p:inputText  autocomplete="off" value="#{loginMB.usuario.cep}"/>
+
+                    <h:outputText value="Telefone " />
+                    <p:inputText  autocomplete="off" value="#{loginMB.usuario.telefone}"/>
+
+                    <h:outputText value="Endereço " />
+                    <p:inputText autocomplete="off" value="#{loginMB.usuario.endereco}"/>
+
+                    <h:outputText value="Email " />
+                    <p:inputText  autocomplete="off" value="#{loginMB.usuario.email}"/>
+
+                    <h:outputText value="Senha " />
+                    <p:inputText  autocomplete="off" value="#{loginMB.usuario.senha}"/>
+
+
+                    <p:commandButton value="Cadastrar" update="pagina" icon="fa fa-check"
+                                     id="btnCadastrar" ajax="true" actionListener="#{loginMB.cadastrar()}" action="#{homeMB.isLogin()}">
+                    </p:commandButton>
+            </p:panelGrid>
+    </p:panel>
+
+    <p:panel id="toggleableLista" header="Lista" toggleable="true" closable="false" toggleSpeed="500">
+    <p:panelGrid>
+        <h:form>
+            <p:dataTable var="item"
+                         rows="5"
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15,20"
+                         value="#{loginMB.findall()}"
+                         paginatorPosition="bottom"
+                         emptyMessage="Nenhum registro encontrado">
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{item.nome}" />
+                </p:column>
+
+                <p:column headerText="Senha">
+                    <h:outputText value="#{item.senha}" />
+                </p:column>
+                <p:column headerText="Idade">
+                    <h:outputText value="#{item.idade}" />
+                </p:column>
+                <p:column headerText="CPF">
+                    <h:outputText value="#{item.cpf}" />
+                </p:column>
+                <p:column headerText="CEP">
+                    <h:outputText value="#{item.cep}" />
+                </p:column>
+                <p:column headerText="Telefone">
+                    <h:outputText value="#{item.telefone}" />
+                </p:column>
+                <p:column headerText="Endereço">
+                    <h:outputText value="#{item.endereco}" />
+                </p:column>
+                <p:column headerText="Email">
+                    <h:outputText value="#{item.email}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </p:panelGrid>
+</p:panel>
+
+
+</html>
